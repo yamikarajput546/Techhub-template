@@ -27,8 +27,10 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: git branch
-
+        run: | 
+          echo github.base_ref: ${{ github.base_ref }}
+          echo github.head_ref: ${{ github.head_ref }}
+          echo github.ref: ${{ github.ref }}
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: git --no-pager diff --name-only ${GITHUB_REF##*/} main
