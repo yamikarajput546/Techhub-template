@@ -33,6 +33,6 @@ jobs:
 
       - name: List all changed files
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed"
-          done
+          env:
+            FIRST_NAME : ${{ steps.changed-files.outputs.all_changed_files }} | sed 's/ /\'$'\n/g' |cut -f 2 -d "/" |uniq
+            PROJECT_NAME : ${{ steps.changed-files.outputs.all_changed_files }} | sed 's/ /\'$'\n/g' |cut -f 2 -d "/" |uniq
