@@ -19,6 +19,9 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    outputs:
+      LANGUAGE_NAME: ${{ steps.get-values.outputs.LANGUAGE_NAME }}
+      PROJECT_NAME: ${{ steps.get-values.outputs.PROJECT_NAME }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -39,3 +42,13 @@ jobs:
 
       - name: echo Language & project name
         run: echo ${{ steps.get-values.outputs.LANGUAGE_NAME }} ${{ steps.get-values.outputs.PROJECT_NAME }}
+  notify:
+    needs: build
+    runs-on: ubuntu-latest
+    if: needs.build.outputs.LANGUAGE_NAME == 'scala' && needs.build.outputs.PROJECT_NAME == 'scala3-example-project-main'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Notify Slack and send eMail
+        run: echo ${{needs.build.outputs.LANGUAGE_NAME}} ${{needs.build.outputs.PROJECT_NAME}} 
