@@ -183,4 +183,6 @@ jobs:
         with:
           node-version: '14'
       - run: npm install
-      - run: npm run-script build
+      - run: |
+            cd ${{needs.init.outputs.LANGUAGE_NAME}}/${{needs.init.outputs.PROJECT_NAME}} 
+            npm run-script build
