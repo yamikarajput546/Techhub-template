@@ -33,6 +33,5 @@ jobs:
 
       - name: List all changed files
         run: |
-          env:
-            FIRST_NAME : ${{ steps.changed-files.outputs.all_changed_files }} | sed 's/ /\'$'\n/g' |cut -f 2 -d "/" |uniq
-            PROJECT_NAME : ${{ steps.changed-files.outputs.all_changed_files }} | sed 's/ /\'$'\n/g' |cut -f 2 -d "/" |uniq
+          ${{ steps.changed-files.outputs.all_changed_files }} | sed 's/ /\'$'\n/g' |cut -f 2 -d "/" |uniq
+          ${{ steps.changed-files.outputs.all_changed_files }} | sed 's/ /\'$'\n/g' |cut -f 2 -d "/" |uniq
