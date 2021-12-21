@@ -55,7 +55,9 @@ jobs:
         
       - name: check build tool
         id: build-tool
-        run:  echo "::set-output name=TOOL_NAME::`if [ -f "build.sbt" ]; then       echo "sbt";   elif [ -f "build.gradle" ];   then       echo "gradle";   elif [ -f "pom.xml" ];   then       echo "maven";   elif [ -f "build.xml" ];   then       echo "ant";   else        echo "javac";   fi`"
+        run:  |
+          cd ${{needs.init.outputs.LANGUAGE_NAME}}/${{needs.init.outputs.PROJECT_NAME}}
+          echo "::set-output name=TOOL_NAME::`if [ -f "build.sbt" ]; then       echo "sbt";   elif [ -f "build.gradle" ];   then       echo "gradle";   elif [ -f "pom.xml" ];   then       echo "maven";   elif [ -f "build.xml" ];   then       echo "ant";   else        echo "javac";   fi`"
 
       - name: Setup JDK
         if: steps.build-tool.outputs.TOOL_NAME == 'sbt'
