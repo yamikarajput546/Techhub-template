@@ -168,3 +168,19 @@ jobs:
         run: |
             cd ${{needs.init.outputs.LANGUAGE_NAME}}/${{needs.init.outputs.PROJECT_NAME}}
             javac src/*.java -d classes
+  build-angular:
+    needs: init
+    runs-on: ubuntu-latest
+    if: needs.init.outputs.LANGUAGE_NAME == 'angular'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: check env
+        run: echo ${{needs.init.outputs.LANGUAGE_NAME}} ${{needs.init.outputs.PROJECT_NAME}}
+      
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm install
+      - run: npm run-script build
