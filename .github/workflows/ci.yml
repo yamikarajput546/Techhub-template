@@ -56,8 +56,7 @@ jobs:
       - name: check build tool
         id: build-tool
         run:  |
-            echo "::set-output name=TOOL_NAME::`
-            if [ -f "build.sbt" ]; then
+            echo "::set-output name=TOOL_NAME::`if [ -f "build.sbt" ]; then
                 echo "sbt"
             elif [ -f "build.gradle" ]
             then
@@ -70,7 +69,7 @@ jobs:
                 echo "ant"
             else 
                 echo "javac"
-            fi`
+            fi`"
 
       - name: Setup JDK
         if: steps.build-tool.outputs.TOOL_NAME == 'sbt'
@@ -79,4 +78,6 @@ jobs:
           distribution: temurin
           java-version: 8
       - name: Build
-        run: sbt clean test
+        run: |
+            cd ${{needs.init.outputs.LANGUAGE_NAME}}/${{needs.init.outputs.PROJECT_NAME}}
+            sbt clean test
