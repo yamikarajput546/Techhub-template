@@ -16,7 +16,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  init:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     outputs:
@@ -42,13 +42,41 @@ jobs:
 
       - name: echo Language & project name
         run: echo ${{ steps.get-values.outputs.LANGUAGE_NAME }} ${{ steps.get-values.outputs.PROJECT_NAME }}
-  notify:
-    needs: build
+  build:
+    needs: init
     runs-on: ubuntu-latest
-    if: needs.build.outputs.LANGUAGE_NAME == 'scala' && needs.build.outputs.PROJECT_NAME == 'scala3-example-project-main'
+    if: needs.init.outputs.LANGUAGE_NAME == 'scala' && needs.init.outputs.PROJECT_NAME == 'scala3-example-project-main'
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Notify Slack and send eMail
-        run: echo ${{needs.build.outputs.LANGUAGE_NAME}} ${{needs.build.outputs.PROJECT_NAME}} 
+      - name: check env
+        run: echo ${{needs.init.outputs.LANGUAGE_NAME}} ${{needs.init.outputs.PROJECT_NAME}}
+        
+      - name: check build tool
+        id: build-tool
+        run:  |
+            echo "::set-output name=TOOL_NAME::`
+            if [ -f "build.sbt" ]; then
+                echo "sbt"
+            elif [ -f "build.gradle" ]
+            then
+                echo "gradle"
+            elif [ -f "pom.xml" ]
+            then
+                echo "maven"
+            elif [ -f "build.xml" ]
+            then
+                echo "ant"
+            else 
+                echo "javac"
+            fi`
+
+      - name: Setup JDK
+        if: steps.build-tool.outputs.TOOL_NAME == 'sbt'
+        uses: actions/setup-java@v2
+        with:
+          distribution: temurin
+          java-version: 8
+      - name: Build
+        run: sbt clean test
