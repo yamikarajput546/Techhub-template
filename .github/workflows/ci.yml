@@ -103,6 +103,7 @@ jobs:
         if: steps.build-tool.outputs.TOOL_NAME == 'scalac'
         run: |
             cd ${{needs.init.outputs.LANGUAGE_NAME}}/${{needs.init.outputs.PROJECT_NAME}}
+            sudo apt install scala -y
             scalac *.scala
             
   build-java:
