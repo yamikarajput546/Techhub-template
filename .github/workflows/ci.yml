@@ -185,5 +185,11 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Build with ng
-        run: ng serve
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build with npm
+        run: npm run build
+        
+      - name: Lint
+        run: npm run lint
