@@ -185,8 +185,5 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Init npm
-        run: npm install
-
-      - name: Build with npm
-        run: npm run-script build
+      - name: Build with ng
+        run: ng serve
