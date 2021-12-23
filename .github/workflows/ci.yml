@@ -192,7 +192,7 @@ jobs:
         run: npm run build
         
   sonarqube:
-    needs: [build-angular, build-scala, build-java]
+    needs: [build-angular, build-scala, build-java, init]
     if: |
       !failure() && !cancelled() && 
       (success('build-angular') || success('build-scala')) || (success('build-java')) 
@@ -207,6 +207,12 @@ jobs:
         fetch-depth: 0
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master
+      with:
+        args: >
+          -Dsonar.organization=Knoldus
+          -Dsonar.projectKey=${{needs.init.outputs.PROJECT_NAME}}
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      
+
