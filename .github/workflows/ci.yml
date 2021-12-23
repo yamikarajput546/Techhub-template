@@ -195,7 +195,7 @@ jobs:
     needs: [build-angular, build-scala, build-java]
     if: |
       !failure() && !cancelled() && 
-      (success('build-angular') || success('build-scala')) || success('build-java')) 
+      (success('build-angular') || success('build-scala')) || (success('build-java')) 
     runs-on: ubuntu-latest
     defaults:
       run:
