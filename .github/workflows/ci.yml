@@ -192,7 +192,8 @@ jobs:
         run: npm run build
         
   sonarqube:
-    needs: [build-angular, build-scala ,build-java]
+    needs: [build-angular, build-scala, build-java]
+    if: ${{ always() && contains(needs.*.result, 'success') && !(contains(needs.*.result, 'failure')) }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
