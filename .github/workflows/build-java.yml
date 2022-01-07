@@ -3,8 +3,8 @@ name: CI with build-java
 
 on:
 
-  # push:
-  #   branches: [feature/Added-submodule-java-hello-world]
+  push:
+    branches: [feature/Added-submodule-java-hello-world]
   # pull_request:
   #   branches: [feature/Added-submodule-java-hello-world]
   
