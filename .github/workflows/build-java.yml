@@ -7,11 +7,11 @@ on:
   pull_request:
     branches: [feature/Added-submodule-java-hello-world]
   
+  
   workflow_run:
-    workflow_run:
-      workflows: ["CI init"]
-      types:
-        - completed
+    workflows: ["CI init"]
+    types:
+      - completed
      
 jobs:
 
