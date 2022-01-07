@@ -10,9 +10,9 @@ on:
   
   workflow_run:
     workflows: ["CI init"]
-      
-      
-    types:
+    branches: [ feature/Added-submodule-java-hello-world ]
+     types:
+      - completed
       - completed
   
 
@@ -21,7 +21,7 @@ jobs:
 
 
   java-job:
-  needs: CI init
+  name: Java Build
     runs-on: ubuntu-latest
     if: needs.init.outputs.LANGUAGE_NAME == 'java'
     defaults:
