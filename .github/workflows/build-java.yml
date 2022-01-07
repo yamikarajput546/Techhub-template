@@ -9,7 +9,9 @@ on:
     branches: [ feature/Added-submodule-java-hello-world  ]
   
   workflow_run:
-    workflows: ["CI init"]
+    workflows:
+      - CI init
+      - build-java
     types:
       - completed
   # workflow_dispatch:
