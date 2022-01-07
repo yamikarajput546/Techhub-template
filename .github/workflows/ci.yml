@@ -122,7 +122,7 @@ jobs:
       - name: Checkout submodules
         uses: srt32/git-actions@v0.0.3
         with:
-          args: git submodule update --init --remote java/TJava
+          args: git submodule update --init --remote ${{needs.init.outputs.LANGUAGE_NAME}}/${{needs.init.outputs.PROJECT_NAME}}          #java/TJava
         
       - name: check build tool
         id: build-tool
