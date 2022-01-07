@@ -1,6 +1,5 @@
 name: CI with build-java
 
-
 on:
 
   push:
@@ -9,15 +8,12 @@ on:
     branches: [feature/Added-submodule-java-hello-world]
   
   workflow_run:
-    workflows: 
-      - CI init
-      
-    types:
-      - completed
+    workflow_run:
+      workflows: ["CI init"]
+      types:
+        - completed
      
-
 jobs:
-
 
   build:
     
