@@ -22,6 +22,9 @@ jobs:
   build:
     
     runs-on: ubuntu-latest
+    outputs:
+      LANGUAGE_NAME: ${{ steps.get-values.outputs.LANGUAGE_NAME }}
+      PROJECT_NAME: ${{ steps.get-values.outputs.PROJECT_NAME }}
     if: needs.init.outputs.LANGUAGE_NAME == 'java'
     defaults:
       run:
