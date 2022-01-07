@@ -10,10 +10,10 @@ on:
   
   workflow_run:
     workflows: ["CI init"]
-    branches: [ feature/Added-submodule-java-hello-world ]
+    
      types:
       - completed
-      - completed
+     
   
 
 
