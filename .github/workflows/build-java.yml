@@ -4,14 +4,14 @@ name: CI with build-java
 on:
 
   push:
-    branches: [ feature/Added-submodule-java-hello-world ]
+    branches: [feature/Added-submodule-java-hello-world]
   pull_request:
-    branches: [ feature/Added-submodule-java-hello-world  ]
+    branches: [feature/Added-submodule-java-hello-world]
   
   workflow_run:
     workflows: 
       - CI init
-      - java-job
+      
     types:
       - completed
      
