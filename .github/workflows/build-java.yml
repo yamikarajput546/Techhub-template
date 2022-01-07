@@ -11,7 +11,7 @@ on:
   workflow_run:
     workflows:
       - CI init
-      - java-job
+      
     types:
       - completed
   # workflow_dispatch:
@@ -21,7 +21,7 @@ jobs:
 
 
   java-job:
-    needs: init
+   
     runs-on: ubuntu-latest
     if: needs.init.outputs.LANGUAGE_NAME == 'java'
     defaults:
