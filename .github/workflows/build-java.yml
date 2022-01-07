@@ -14,14 +14,14 @@ on:
       
     types:
       - completed
-  # workflow_dispatch:
+  
 
 
 jobs:
 
 
   java-job:
-   
+  needs: CI init
     runs-on: ubuntu-latest
     if: needs.init.outputs.LANGUAGE_NAME == 'java'
     defaults:
