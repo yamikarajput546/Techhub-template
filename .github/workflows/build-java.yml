@@ -5,8 +5,8 @@ on:
 
   push:
     branches: [feature/Added-submodule-java-hello-world]
-  # pull_request:
-  #   branches: [feature/Added-submodule-java-hello-world]
+  pull_request:
+    branches: [feature/Added-submodule-java-hello-world]
   
   workflow_run:
     workflows: 
@@ -19,8 +19,8 @@ on:
 jobs:
 
 
-  java-job:
-    name: Java Build
+  build:
+    
     runs-on: ubuntu-latest
     if: needs.init.outputs.LANGUAGE_NAME == 'java'
     defaults:
