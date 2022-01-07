@@ -2,10 +2,10 @@ name: CI with build-java
 
 on:
 
-  push:
-    branches: [feature/Added-submodule-java-hello-world]
-  pull_request:
-    branches: [feature/Added-submodule-java-hello-world]
+  # push:
+  #   branches: [feature/Added-submodule-java-hello-world]
+  # pull_request:
+  #   branches: [feature/Added-submodule-java-hello-world]
   
   
   workflow_run:
@@ -15,8 +15,7 @@ on:
      
 jobs:
 
-  build:
-    
+  build: 
     runs-on: ubuntu-latest
     outputs:
       LANGUAGE_NAME: ${{ steps.get-values.outputs.LANGUAGE_NAME }}
