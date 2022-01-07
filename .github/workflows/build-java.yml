@@ -20,7 +20,7 @@ jobs:
 
 
   java-job:
-  name: Java Build
+    name: Java Build
     runs-on: ubuntu-latest
     if: needs.init.outputs.LANGUAGE_NAME == 'java'
     defaults:
