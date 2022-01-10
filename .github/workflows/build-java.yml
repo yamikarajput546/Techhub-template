@@ -3,6 +3,7 @@ name: CI with build-java
 on:
   workflow_run:
     workflows: ["CI init"]
+    branches: [main]
     types:
       - completed
      
