@@ -18,7 +18,7 @@ on:
 
 jobs:
 
-build-java:
+  build-java:
     # needs: init
     runs-on: ubuntu-latest
     if: CI init.init.outputs.LANGUAGE_NAME == 'java'
